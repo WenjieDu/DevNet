@@ -2,7 +2,6 @@
 # you could download it as you wish
 
 import pandas as pd
-import numpy as np
 from sklearn.model_selection import train_test_split
 
 if __name__ == '__main__':
@@ -14,8 +13,3 @@ if __name__ == '__main__':
 
     train.to_csv('dataset/creditcard_train.csv', index=False)
     test.to_csv('dataset/creditcard_test.csv', index=False)
-
-    test_x = test.drop('class', axis=1)
-    test_y = test['class']
-    np.save('dataset/creditcard_test_x.npy', test_x)
-    np.save('dataset/creditcard_test_y.npy', test_y)

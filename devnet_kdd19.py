@@ -300,7 +300,10 @@ def run_devnet(args):
 
             outlier_indices = np.where(y_train == 1)[0]
             inlier_indices = np.where(y_train == 0)[0]
-            print(y_train.shape[0], outlier_indices.shape[0], inlier_indices.shape[0], n_noise)
+            print('training samples num:', y_train.shape[0],
+                  'outlier num:', outlier_indices.shape[0],
+                  'inlier num:', inlier_indices.shape[0],
+                  'noise num:', n_noise)
             n_samples_trn = x_train.shape[0]
             n_outliers = len(outlier_indices)
             print("Training data size: %d, No. outliers: %d" % (x_train.shape[0], n_outliers))
@@ -343,23 +346,26 @@ def run_devnet(args):
                      network_depth, mean_auc, mean_aucpr, std_auc, std_aucpr, train_time, test_time, path=args.output)
 
 
-parser = argparse.ArgumentParser()
-parser.add_argument("--network_depth", choices=['1', '2', '4'], default='2',
-                    help="the depth of the network architecture")
-parser.add_argument("--batch_size", type=int, default=512, help="batch size used in SGD")
-parser.add_argument("--nb_batch", type=int, default=20, help="the number of batches per epoch")
-parser.add_argument("--epochs", type=int, default=50, help="the number of epochs")
-parser.add_argument("--runs", type=int, default=10,
-                    help="how many times we repeat the experiments to obtain the average performance")
-parser.add_argument("--known_outliers", type=int, default=30, help="the number of labeled outliers available at hand")
-parser.add_argument("--cont_rate", type=float, default=0.02, help="the outlier contamination rate in the training data")
-parser.add_argument("--input_path", type=str, default='./dataset/', help="the path of the data sets")
-parser.add_argument("--data_set", type=str, default='annthyroid_21feat_normalised', help="a list of data set names")
-parser.add_argument("--data_format", choices=['0', '1'], default='0',
-                    help="specify whether the input data is a csv (0) or libsvm (1) data format")
-parser.add_argument("--output", type=str,
-                    default='./results/devnet_auc_performance_30outliers_0.02contrate_2depth_10runs.csv',
-                    help="the output file path")
-parser.add_argument("--ramdn_seed", type=int, default=42, help="the random seed number")
-args = parser.parse_args()
-run_devnet(args)
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--network_depth", choices=['1', '2', '4'], default='2',
+                        help="the depth of the network architecture")
+    parser.add_argument("--batch_size", type=int, default=512, help="batch size used in SGD")
+    parser.add_argument("--nb_batch", type=int, default=20, help="the number of batches per epoch")
+    parser.add_argument("--epochs", type=int, default=50, help="the number of epochs")
+    parser.add_argument("--runs", type=int, default=10,
+                        help="how many times we repeat the experiments to obtain the average performance")
+    parser.add_argument("--known_outliers", type=int, default=30,
+                        help="the number of labeled outliers available at hand")
+    parser.add_argument("--cont_rate", type=float, default=0.02,
+                        help="the outlier contamination rate in the training data")
+    parser.add_argument("--input_path", type=str, default='./dataset/', help="the path of the data sets")
+    parser.add_argument("--data_set", type=str, default='annthyroid_21feat_normalised', help="a list of data set names")
+    parser.add_argument("--data_format", choices=['0', '1'], default='0',
+                        help="specify whether the input data is a csv (0) or libsvm (1) data format")
+    parser.add_argument("--output", type=str,
+                        default='./results/devnet_auc_performance_30outliers_0.02contrate_2depth_10runs.csv',
+                        help="the output file path")
+    parser.add_argument("--ramdn_seed", type=int, default=42, help="the random seed number")
+    args = parser.parse_args()
+    run_devnet(args)
