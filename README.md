@@ -9,7 +9,7 @@ You can fast run code on [credit card fraud](https://www.kaggle.com/mlg-ulb/cred
 
 * First you need to generate dataset with script `dataset/create_dataset.py`. 
 * Then you can run with command `python devnet_kdd19.py` with default arguments.
-* To test saved model, please try `test.py`.
+* To test saved model, please modify `test.py` and run it.
 
 ## Paper Details
 Guansong Pang, Chunhua Shen, and Anton van den Hengel. 2019. 
