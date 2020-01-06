@@ -6,8 +6,8 @@ from sklearn.model_selection import train_test_split
 
 if __name__ == '__main__':
     data = pd.read_csv('dataset/creditcard.csv')
-    data.drop(['Time', 'Class'], axis=1, inplace=True)
-    data.rename(columns={'Class:class'}, inplace=True)
+    data.drop(['Time'], axis=1, inplace=True)
+    data.rename(columns={'Class':'class'}, inplace=True)
 
     train, test = train_test_split(data, test_size=0.2)
 
